@@ -65,21 +65,23 @@ function trackMaterials() {
     return;
   }
 
-  const timestamp = new Date().toLocaleString();
+// Use toLocaleString() with options for consistent date and time format
+const timestampOptions = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+const timestamp = new Date().toLocaleString('en-US', timestampOptions);
 
-  const newRow = document.createElement('tr');
-  const cells = [
-    createTableCell(truck),
-    createTableCell(materialType),
-    createTableCell(count),
-    createTableCellWithDelete(timestamp, newRow),
-  ];
+const newRow = document.createElement('tr');
+const cells = [
+  createTableCell(truck),
+  createTableCell(materialType),
+  createTableCell(count),
+  createTableCellWithDelete(timestamp, newRow),
+];
 
-  cells.forEach(cell => newRow.appendChild(cell));
-  trackingBody.appendChild(newRow);
+cells.forEach(cell => newRow.appendChild(cell));
+trackingBody.appendChild(newRow);
 
-  // Save the updated data to localStorage
-  saveDataToLocalStorage();
+// Save the updated data to localStorage
+saveDataToLocalStorage();
 }
 
 function deleteRow(row) {
