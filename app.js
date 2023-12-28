@@ -1,21 +1,19 @@
 const trackingBody = document.getElementById('trackingBody');
 
-// Load existing data from localStorage on page load
-document.addEventListener('DOMContentLoaded', () => {
-  loadStoredData();
-});
-
 function createTableCell(text, isDeleteButton = false) {
   const cell = document.createElement('td');
 
+  // Check if text is a string before using toLowerCase
   if (typeof text === 'string') {
+    // Add space between "truck" and truck number
     if (text.startsWith('truck')) {
-      const truckNumber = text.substring(5);
+      const truckNumber = text.substring(5); // Extract truck number
       cell.textContent = `Truck ${truckNumber}`;
     } else {
       cell.textContent = text;
     }
 
+    // Capitalize "batts" and "blow"
     const lowerCaseText = text.toLowerCase();
     if (lowerCaseText === 'batts' || lowerCaseText === 'blow') {
       cell.textContent = text.toUpperCase();
@@ -24,6 +22,7 @@ function createTableCell(text, isDeleteButton = false) {
     cell.textContent = text;
   }
 
+  // Add a delete button for non-empty rows
   if (isDeleteButton) {
     const deleteButton = createDeleteButton(cell.parentNode);
     cell.appendChild(deleteButton);
@@ -45,6 +44,7 @@ function createTableCellWithDelete(text, row) {
   const cell = document.createElement('td');
   cell.textContent = text;
 
+  // Add Delete button for the "timestamp" cell
   const deleteButton = createDeleteButton(row);
   cell.appendChild(deleteButton);
 
@@ -65,65 +65,20 @@ function trackMaterials() {
     return;
   }
 
-// Use toLocaleString() with options for consistent date and time format
-const timestampOptions = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-const timestamp = new Date().toLocaleString('en-US', timestampOptions);
+  const timestamp = new Date().toLocaleString();
 
-const newRow = document.createElement('tr');
-const cells = [
-  createTableCell(truck),
-  createTableCell(materialType),
-  createTableCell(count),
-  createTableCellWithDelete(timestamp, newRow),
-];
+  const newRow = document.createElement('tr');
+  const cells = [
+    createTableCell(truck),
+    createTableCell(materialType),
+    createTableCell(count),
+    createTableCellWithDelete(timestamp, newRow), // Timestamp with Delete button
+  ];
 
-cells.forEach(cell => newRow.appendChild(cell));
-trackingBody.appendChild(newRow);
-
-// Save the updated data to localStorage
-saveDataToLocalStorage();
+  cells.forEach(cell => newRow.appendChild(cell));
+  trackingBody.appendChild(newRow);
 }
 
 function deleteRow(row) {
   row.remove();
-
-  // Save the updated data to localStorage
-  saveDataToLocalStorage();
-}
-
-function saveDataToLocalStorage() {
-  const tableData = [];
-
-  trackingBody.querySelectorAll('tr').forEach(row => {
-    const rowData = {
-      truck: row.cells[0].textContent,
-      materialType: row.cells[1].textContent,
-      count: row.cells[2].textContent,
-      timestamp: row.cells[3].textContent,
-    };
-    tableData.push(rowData);
-  });
-
-  localStorage.setItem('trackingData', JSON.stringify(tableData));
-}
-
-function loadStoredData() {
-  const storedData = localStorage.getItem('trackingData');
-
-  if (storedData) {
-    const tableData = JSON.parse(storedData);
-
-    tableData.forEach(data => {
-      const newRow = document.createElement('tr');
-      const cells = [
-        createTableCell(data.truck),
-        createTableCell(data.materialType),
-        createTableCell(data.count),
-        createTableCellWithDelete(data.timestamp, newRow),
-      ];
-
-      cells.forEach(cell => newRow.appendChild(cell));
-      trackingBody.appendChild(newRow);
-    });
-  }
 }
