@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Material Tracker</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+  <div>
+    <label for="truckSelect">Select Truck:</label>
+    <select id="truckSelect">
+      <option value="truck1">Truck 1</option>
+      <option value="truck2">Truck 2</option>
+      <!-- Add more trucks as needed -->
+    </select>
+  </div>
+
+  <div>
+    <label for="materialSelect">Select Material Type:</label>
+    <select id="materialSelect">
+      <option value="batts">Batts</option>
+      <option value="blow">Blow</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="materialCount">Enter Material Count:</label>
+    <input type="number" id="materialCount" value="0">
+  </div>
+
+  <button onclick="trackMaterials()">Track Materials</button>
+
+  <div>
+    <h2>Material Tracking</h2>
+    <ul id="trackingList"></ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
