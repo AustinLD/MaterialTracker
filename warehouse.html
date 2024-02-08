@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Warehouse Inventory Tracker</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<h1>Warehouse Inventory Tracker</h1>
+
+<!-- Add an input field for incoming deliveries -->
+<label for="incomingProduct">Incoming Product:</label>
+<input type="text" id="incomingProduct" placeholder="Enter product name">
+<label for="incomingQuantity">Quantity:</label>
+<input type="number" id="incomingQuantity" placeholder="Enter quantity">
+<button onclick="recordIncomingDelivery()">Record Incoming Delivery</button>
+<!-- Button to remove quantity -->
+<button onclick="removeQuantity()">Remove Quantity</button>
+
+
+		<div id="inventoryTable">
+			<h2>Warehouse Inventory</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>Quantity</th>
+					</tr>
+				</thead>
+				<tbody id="inventoryTableBody">
+					<!-- Inventory data will be populated here -->
+				</tbody>
+			</table>
+		</div>
+
+		<script src="warehouse.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          updateInventoryTable("warehouse");
+      });
+  </script>
+
+
+	</body>
+</html>

@@ -1,69 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material Tracker</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div>
-    <div>
-      <label for="truckInput">Enter Truck:</label>
-      <input type="text" id="truckInput" placeholder="Truck 1" required>
-    </div>
-  </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Inventory Management System</title>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+	</head>
+	<body>
+		<h1>Inventory Management System</h1>
 
-  <div>
-    <label for="materialSelect">Select Material Type:</label>
-    <select id="materialSelect">
-      <option value="21UF 23">21UF 23</option>
-      <option value="30K 15">30K 15</option>
-      <option value="30K 24">30K 24</option>
-      <option value="38 UF 24">38 UF 24</option>
-      <option value="16x3 SAFB">16x3 SAFB</option>
-      <option value="24x3 SAFB">24x3 SAFB</option>
-      <option value="16 AA2">16" AA2</option>
-      <option value="24 AA2">24" AA2</option>
-      <option value="16 M-Shield">16" M-Shield</option>
-      <option value="24 M-Shield">24" M-Shield</option>
-      <option value="16 VR Plus">16" VR Plus</option>
-      <option value="24 VR Plus">24" VR Plus</option>
-      <option value="24 RB">24" RB</option>
-      <option value="30 RB">30" RB</option>
-      <option value="Polyvent">Polyvent</option>
-      <option value="Accuvent">Accuvent</option>
-      <option value="24 Baffle">24" Baffle</option>
-      <option value="16 Baffle">16" Baffle</option>
-      <option value="Polyseal">Polyseal</option>
-      <option value="Gasket Foam">Gasket Foam</option>
-      <option value="SkyFlex">SkyFlex</option>
-      <option value="T-Ply">T-Ply</option>
-      <option value="Fire Paint">Fire Paint</option>
-      <option value="Corefill">Corefill</option>
-      <option value="No-Burn">No-Burn</option>
-    </select>
-  </div>
+		<div>
+			<label for="truckNumber">Truck Number:</label>
+			<input type="text" id="truckNumber" />
+		</div>
 
-  <div>
-    <label for="materialCount">Enter Material Count:</label>
-    <input type="number" id="materialCount" value="0">
-  </div>
+		<div>
+			<h2>Truck Inventory</h2>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Truck Number</th>
+						<th>Product</th>
+						<th>Product Loaded</th>
+						<th>Product Left Over</th>
+						<th>Total Product Used</th>
+						<th>Product Removed</th>
+						<th>Left on Truck</th>
+					</tr>
+				</thead>
+				<tbody id="inventoryTableBody">
+					<!-- Table rows will be dynamically added here -->
+				</tbody>
+			</table>
+		</div>
 
-  <button onclick="trackMaterials()">Track Materials</button>
+		<div>
+			<h2>Products Loaded</h2>
+			<label for="loadedProduct">Product:</label>
+			<select id="loadedProduct">
+				<option value="Blow">Blow</option>
+				<option value="11UF 15">11UF 15</option>
+				<option value="11K 15">11K 15</option>
+				<option value="11UF 24">11UF 24</option>
+				<option value="11K 24">11K 24</option>
+				<option value="13UF 11">13UF 11</option>
+				<option value="13UF 15">13UF 15</option>
+				<option value="13K 15">13K 15</option>
+				<option value="13UF 24">13UF 24</option>
+				<option value="13K 24">13K 24</option>
+				<option value="15K 15">15K 15</option>
+				<option value="19UF 11">19UF 11</option>
+				<option value="19UF 15">19UF 15</option>
+				<option value="19K 15">19K 15</option>
+				<option value="19UF 24">19UF 24</option>
+				<option value="19K 24">19K 24</option>
+				<option value="21UF 15">21UF 15</option>
+				<option value="21UF 23">21UF 23</option>
+				<option value="30K 15">30K 15</option>
+				<option value="30K 24">30K 24</option>
+				<option value="38UF 24">38UF 24</option>
+				<option value="38K 24">38K 24</option>
+				<option value="16x3 SAFB">16"x3" SAFB</option>
+				<option value="24x3 SAFB">24"x3" SAFB</option>
+				<option value="16 AA2">16" AA2</option>
+				<option value="24 AA2">24" AA2</option>
+				<option value="16 M-Shield">16" M-Shield</option>
+				<option value="24 M-Shield">24" M-Shield</option>
+				<option value="16 VR Plus">16" VR Plus</option>
+				<option value="24 VR Plus">24" VR Plus</option>
+				<option value="24 RB">24" RB</option>
+				<option value="30 RB">30" RB</option>
+				<option value="Polyvent">Polyvent</option>
+				<option value="Accuvent">Accuvent</option>
+				<option value="24 Baffle">24" Baffle</option>
+				<option value="16 Baffle">16" Baffle</option>
+				<option value="Polyseal">Polyseal</option>
+				<option value="Gasket Foam">Gasket Foam</option>
+				<option value="SkyFlex">SkyFlex</option>
+				<option value="T-Ply">T-Ply</option>
+				<option value="Fire Paint">Fire Paint</option>
+				<option value="Corefill">Corefill</option>
+				<option value="No-Burn">No-Burn</option>
+			</select>
+			<label for="loadedQuantity">Quantity Loaded:</label>
+			<input type="number" id="loadedQuantity" />
+			<button onclick="loadProductsOntoTruck()">
+				Load Products Onto Truck
+			</button>
+		</div>
 
-  <table id="trackingTable">
-    <thead>
-      <tr>
-        <th>Truck</th>
-        <th>Material Type</th>
-        <th>Count</th>
-        <th>Timestamp</th>
-      </tr>
-    </thead>
-    <tbody id="trackingBody"></tbody>
-  </table>
+		<div>
+			<h2>Products Left Over</h2>
+			<label for="leftOverProduct">Product:</label>
+			<select id="leftOverProduct">
+				<option value="Blow">Blow</option>
+				<option value="11UF 15">11UF 15</option>
+				<option value="11K 15">11K 15</option>
+				<option value="11UF 24">11UF 24</option>
+				<option value="11K 24">11K 24</option>
+				<option value="13UF 11">13UF 11</option>
+				<option value="13UF 15">13UF 15</option>
+				<option value="13K 15">13K 15</option>
+				<option value="13UF 24">13UF 24</option>
+				<option value="13K 24">13K 24</option>
+				<option value="15K 15">15K 15</option>
+				<option value="19UF 11">19UF 11</option>
+				<option value="19UF 15">19UF 15</option>
+				<option value="19K 15">19K 15</option>
+				<option value="19UF 24">19UF 24</option>
+				<option value="19K 24">19K 24</option>
+				<option value="21UF 15">21UF 15</option>
+				<option value="21UF 23">21UF 23</option>
+				<option value="30K 15">30K 15</option>
+				<option value="30K 24">30K 24</option>
+				<option value="38UF 24">38UF 24</option>
+				<option value="38K 24">38K 24</option>
+				<option value="16x3 SAFB">16"x3" SAFB</option>
+				<option value="24x3 SAFB">24"x3" SAFB</option>
+				<option value="16 AA2">16" AA2</option>
+				<option value="24 AA2">24" AA2</option>
+				<option value="16 M-Shield">16" M-Shield</option>
+				<option value="24 M-Shield">24" M-Shield</option>
+				<option value="16 VR Plus">16" VR Plus</option>
+				<option value="24 VR Plus">24" VR Plus</option>
+				<option value="24 RB">24" RB</option>
+				<option value="30 RB">30" RB</option>
+				<option value="Polyvent">Polyvent</option>
+				<option value="Accuvent">Accuvent</option>
+				<option value="24 Baffle">24" Baffle</option>
+				<option value="16 Baffle">16" Baffle</option>
+				<option value="Polyseal">Polyseal</option>
+				<option value="Gasket Foam">Gasket Foam</option>
+				<option value="SkyFlex">SkyFlex</option>
+				<option value="T-Ply">T-Ply</option>
+				<option value="Fire Paint">Fire Paint</option>
+				<option value="Corefill">Corefill</option>
+				<option value="No-Burn">No-Burn</option>
+			</select>
+			<label for="leftOverQuantity">Quantity Left Over:</label>
+			<input type="number" id="leftOverQuantity" />
+			<button onclick="recordLeftOverProducts()">
+				Record Left Over Products
+			</button>
+		</div>
 
-  <script src="app.js"></script>
-</body>
+		<div>
+			<h2>Remove Products from Truck</h2>
+			<label for="removeProduct">Product:</label>
+			<select id="removeProduct">
+				<option value="Blow">Blow</option>
+				<option value="11UF 15">11UF 15</option>
+				<option value="11K 15">11K 15</option>
+				<option value="11UF 24">11UF 24</option>
+				<option value="11K 24">11K 24</option>
+				<option value="13UF 11">13UF 11</option>
+				<option value="13UF 15">13UF 15</option>
+				<option value="13K 15">13K 15</option>
+				<option value="13UF 24">13UF 24</option>
+				<option value="13K 24">13K 24</option>
+				<option value="15K 15">15K 15</option>
+				<option value="19UF 11">19UF 11</option>
+				<option value="19UF 15">19UF 15</option>
+				<option value="19K 15">19K 15</option>
+				<option value="19UF 24">19UF 24</option>
+				<option value="19K 24">19K 24</option>
+				<option value="21UF 15">21UF 15</option>
+				<option value="21UF 23">21UF 23</option>
+				<option value="30K 15">30K 15</option>
+				<option value="30K 24">30K 24</option>
+				<option value="38UF 24">38UF 24</option>
+				<option value="38K 24">38K 24</option>
+				<option value="16x3 SAFB">16"x3" SAFB</option>
+				<option value="24x3 SAFB">24"x3" SAFB</option>
+				<option value="16 AA2">16" AA2</option>
+				<option value="24 AA2">24" AA2</option>
+				<option value="16 M-Shield">16" M-Shield</option>
+				<option value="24 M-Shield">24" M-Shield</option>
+				<option value="16 VR Plus">16" VR Plus</option>
+				<option value="24 VR Plus">24" VR Plus</option>
+				<option value="24 RB">24" RB</option>
+				<option value="30 RB">30" RB</option>
+				<option value="Polyvent">Polyvent</option>
+				<option value="Accuvent">Accuvent</option>
+				<option value="24 Baffle">24" Baffle</option>
+				<option value="16 Baffle">16" Baffle</option>
+				<option value="Polyseal">Polyseal</option>
+				<option value="Gasket Foam">Gasket Foam</option>
+				<option value="SkyFlex">SkyFlex</option>
+				<option value="T-Ply">T-Ply</option>
+				<option value="Fire Paint">Fire Paint</option>
+				<option value="Corefill">Corefill</option>
+				<option value="No-Burn">No-Burn</option>
+			</select>
+			<label for="removeQuantity">Quantity Removed:</label>
+			<input type="number" id="removeQuantity" />
+			<button onclick="removeProductsFromTruck()">
+				Remove Products from Truck
+			</button>
+		</div>
+
+		<div>
+			<h2>Total Products Removed</h2>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>Total Removed</th>
+					</tr>
+				</thead>
+				<tbody id="totalProductsRemovedTableBody">
+					<!-- Table rows will be dynamically added here -->
+				</tbody>
+			</table>
+		</div>
+
+		<script src="app.js"></script>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+					updateInventoryTable("index");
+			});
+	</script>
+
+
+	</body>
 </html>

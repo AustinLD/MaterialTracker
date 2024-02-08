@@ -1,3 +1,4 @@
+// Functions for inventory management
 function loadProductsOntoTruck() {
 	const product = document.getElementById("loadedProduct").value;
 	const quantity = parseInt(document.getElementById("loadedQuantity").value);
@@ -126,16 +127,48 @@ function deleteRow(index) {
 	localStorage.setItem("inventoryData", JSON.stringify(inventoryData));
 
 	updateInventoryTable();
-	updateTotalProductsRemovedTable();
+	updateTotalProductsRemovedTable(); // Ensure this function is defined
 }
 
 function updateTotalProductsRemovedTable() {
+	// Implementation for updating total products removed table
+	// ...
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+// Functions for warehouse inventory tracking
+function recordIncomingDelivery() {
+	const product = document.getElementById("incomingProduct").value;
+	const quantity = parseInt(document.getElementById("incomingQuantity").value);
+
+	if (!product || isNaN(quantity) || quantity <= 0) {
+		alert("Please enter a valid product name and quantity.");
+		return;
+	}
+
+	updateInventory(product, quantity); // Update inventory with positive quantity for incoming delivery
+}
+
+function updateInventory(product, quantity) {
+	let inventoryData = JSON.parse(localStorage.getItem("inventoryData")) || [];
+
+	// Find the entry for the product in inventory data
+	let productEntry = inventoryData.find((entry) => entry.product === product);
+
+	// If product entry doesn't exist, create a new one
+	if (!productEntry) {
+		productEntry = { product: product, quantity: 0 };
+		inventoryData.push(productEntry);
+	}
+
+	// Update the quantity for the product
+	productEntry.quantity += quantity;
+
+	// Update local storage with the modified inventory data
+	localStorage.setItem("inventoryData", JSON.stringify(inventoryData));
+
+	// Update the display of inventory table
 	updateInventoryTable();
-	updateTotalProductsRemovedTable();
-});
+}
 
 function updateInventoryTable() {
 	const inventoryTableBody = document.getElementById("inventoryTableBody");
@@ -144,24 +177,37 @@ function updateInventoryTable() {
 	// Clear the table body
 	inventoryTableBody.innerHTML = "";
 
-	inventoryData.forEach((entry, index) => {
-		const leftOnTruck =
-			entry.productLoaded - entry.productLeftOver - entry.productRemoved;
-
-		const row = document.createElement("tr");
-		row.innerHTML = `
-          <td>${entry.date}</td>
-          <td>${entry.truckNumber}</td>
-          <td>${entry.product}</td>
-          <td>${entry.productLoaded}</td>
-          <td>${entry.productLeftOver}</td>
-          <td>${
-						entry.productLoaded - entry.productLeftOver
-					}</td> <!-- Calculate Total Product Used -->
-          <td>${entry.productRemoved}</td>
-          <td class="left-on-truck">${leftOnTruck}</td> <!-- Display Left on Truck -->
-          <td><button onclick="deleteRow(${index})" class="delete-button">X</button></td>
-      `;
-		inventoryTableBody.appendChild(row);
-	});
+	// Populate the table with inventory data
+    inventoryData.forEach((entry) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${entry.product}</td>
+            <td>${entry.productLoaded || 0}</td>
+            <td>${entry.productLeftOver || 0}</td>
+            <td>${(entry.productLoaded || 0) - (entry.productLeftOver || 0)}</td>
+            <td>${entry.productRemoved || 0}</td>
+            <td>${((entry.productLoaded || 0) - (entry.productLeftOver || 0)) - (entry.productRemoved || 0)}</td>
+        `;
+        inventoryTableBody.appendChild(row);
+    });
 }
+
+function loadInventoryData() {
+	// Call updateInventoryTable to populate the table with existing inventory data
+	updateInventoryTable();
+}
+
+function removeQuantity() {
+  const product = document.getElementById('incomingProduct').value;
+  const quantity = parseInt(document.getElementById('incomingQuantity').value);
+
+  if (!product || isNaN(quantity) || quantity <= 0) {
+      alert('Please enter a valid product name and quantity.');
+      return;
+  }
+
+  updateInventory(product, -quantity); // Update inventory with negative quantity to remove
+}
+
+// Event listener for loading inventory data when the page loads
+document.addEventListener("DOMContentLoaded", loadInventoryData);
