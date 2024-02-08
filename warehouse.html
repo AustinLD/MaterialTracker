@@ -11,8 +11,51 @@
 
 <!-- Add an input field for incoming deliveries -->
 <label for="incomingProduct">Incoming Product:</label>
-<input type="text" id="incomingProduct" placeholder="Enter product name">
-<label for="incomingQuantity">Quantity:</label>
+<select id="incomingProduct">
+	<option value="Blow">Blow</option>
+	<option value="11UF 15">11UF 15</option>
+	<option value="11K 15">11K 15</option>
+	<option value="11UF 24">11UF 24</option>
+	<option value="11K 24">11K 24</option>
+	<option value="13UF 11">13UF 11</option>
+	<option value="13UF 15">13UF 15</option>
+	<option value="13K 15">13K 15</option>
+	<option value="13UF 24">13UF 24</option>
+	<option value="13K 24">13K 24</option>
+	<option value="15K 15">15K 15</option>
+	<option value="19UF 11">19UF 11</option>
+	<option value="19UF 15">19UF 15</option>
+	<option value="19K 15">19K 15</option>
+	<option value="19UF 24">19UF 24</option>
+	<option value="19K 24">19K 24</option>
+	<option value="21UF 15">21UF 15</option>
+	<option value="21UF 23">21UF 23</option>
+	<option value="30K 15">30K 15</option>
+	<option value="30K 24">30K 24</option>
+	<option value="38UF 24">38UF 24</option>
+	<option value="38K 24">38K 24</option>
+	<option value="16x3 SAFB">16"x3" SAFB</option>
+	<option value="24x3 SAFB">24"x3" SAFB</option>
+	<option value="16 AA2">16" AA2</option>
+	<option value="24 AA2">24" AA2</option>
+	<option value="16 M-Shield">16" M-Shield</option>
+	<option value="24 M-Shield">24" M-Shield</option>
+	<option value="16 VR Plus">16" VR Plus</option>
+	<option value="24 VR Plus">24" VR Plus</option>
+	<option value="24 RB">24" RB</option>
+	<option value="30 RB">30" RB</option>
+	<option value="Polyvent">Polyvent</option>
+	<option value="Accuvent">Accuvent</option>
+	<option value="24 Baffle">24" Baffle</option>
+	<option value="16 Baffle">16" Baffle</option>
+	<option value="Polyseal">Polyseal</option>
+	<option value="Gasket Foam">Gasket Foam</option>
+	<option value="SkyFlex">SkyFlex</option>
+	<option value="T-Ply">T-Ply</option>
+	<option value="Fire Paint">Fire Paint</option>
+	<option value="Corefill">Corefill</option>
+	<option value="No-Burn">No-Burn</option>
+</select>
 <input type="number" id="incomingQuantity" placeholder="Enter quantity">
 <button onclick="recordIncomingDelivery()">Record Incoming Delivery</button>
 <!-- Button to remove quantity -->
